@@ -1,0 +1,36 @@
+<%- if @log_level -%>
+log-level <%= @log_level %>
+<%- end -%>
+<%- if @log_mode -%>
+log-mode <%= @log_mode %>
+<%- end -%>
+<%- if @stateless -%>
+stateless
+<%- end -%>
+<%- @ifaces.sort.each do |iface, params| -%>
+iface "<%= iface %>" {
+  <%- if params['t1'] -%>
+  t1 <%= params['t1'] %>
+  <%- end -%>
+  <%- if params['t2'] -%>
+  t2 <%= params['t2'] %>
+  <%- end -%>
+  <%- if params['prefered_lifetime'] -%>
+  prefered-lifetime <%= params['prefered_lifetime'] %>
+  <%- end -%>
+  <%- if params['options'] -%>
+  <%- params['options'].sort.each do |k, v| -%>
+  option <%= k %> <%= v %>
+  <%- end -%>
+  <%- end -%>
+  <%- if params['pools'] -%>
+  <%- params['pools'].sort.each do |pool| -%>
+  class {
+    <%- pool.sort.each do |k, v| -%>
+    <%= k %> <%= v %>
+    <%- end -%>
+  }
+  <%- end -%>
+  <%- end -%>
+}
+<%- end -%>

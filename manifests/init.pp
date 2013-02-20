@@ -3,6 +3,8 @@ class dibbler (
   $log_mode = unset,
   $stateless = unset,
   $ifaces = {},
+  $enable = true,
+  $start = true,
 ) {
   class{'dibbler::install':} ~>
   class{'dibbler::config':} ~>

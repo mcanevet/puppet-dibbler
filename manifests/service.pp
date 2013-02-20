@@ -1,6 +1,8 @@
 class dibbler::service {
+  $ensure = $dibbler::start ? {true => running, default => stopped}
+
   service{'dibbler-server':
-    ensure => running,
-    enable => true,
+    ensure => $ensure,
+    enable => $dibbler::enable,
   }
 }

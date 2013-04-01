@@ -1,10 +1,13 @@
 class dibbler::config {
-
-  file {'/etc/dibbler/server.conf':
-    owner   => root,
-    group   => root,
+  concat {$dibbler::conffile:
+    owner   => 'root',
+    group   => 'root',
     mode    => '0644',
-    content => template('dibbler/server.conf.erb'),
   }
-
+  concat::fragment {"dibbler.conf-globals":
+    target  => $dibbler::conffile,
+    content => template('dibbler/server.conf.erb'),
+    order   => 01,
+  }
+  create_resources(dibbler::interface, $dibbler::ifaces)
 }

@@ -1,0 +1,25 @@
+iface "<%= name %>" {
+  <%- if @t1 -%>
+  t1 <%= @t1 %>
+  <%- end -%>
+  <%- if @t2 -%>
+  t2 <%= @t2 %>
+  <%- end -%>
+  <%- if @prefered_lifetime -%>
+  prefered-lifetime <%= @prefered_lifetime %>
+  <%- end -%>
+  <%- if @options -%>
+  <%- @options.sort.each do |k, v| -%>
+  option <%= k %> <%= v %>
+  <%- end -%>
+  <%- end -%>
+  <%- if @pools -%>
+  <%- @pools.sort.each do |pool| -%>
+  class {
+    <%- pool.sort.each do |k, v| -%>
+    <%= k %> <%= v %>
+    <%- end -%>
+  }
+  <%- end -%>
+  <%- end -%>
+}
